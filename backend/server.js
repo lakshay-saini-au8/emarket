@@ -5,6 +5,7 @@ import colors from "colors";
 import { notFound, errorHandler } from "./middlewares/Error.middleware.js";
 import connectDB from "./config/db.js";
 import productRoutes from "./routes/Product.routes.js";
+import usersRoutes from "./routes/User.routes.js";
 
 // env config
 dotenv.config();
@@ -12,6 +13,7 @@ dotenv.config();
 connectDB();
 
 const app = express();
+app.use(express.json());
 // // enables cors
 app.use(
   cors({
@@ -25,6 +27,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/products", productRoutes);
+app.use("/api/users", usersRoutes);
 
 // for invaild url
 app.use(notFound);
