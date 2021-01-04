@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import morgan from "morgan";
 import dotenv from "dotenv";
 import colors from "colors";
 import { notFound, errorHandler } from "./middlewares/Error.middleware.js";
@@ -14,6 +15,9 @@ dotenv.config();
 connectDB();
 
 const app = express();
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
 app.use(express.json());
 // // enables cors
 app.use(
